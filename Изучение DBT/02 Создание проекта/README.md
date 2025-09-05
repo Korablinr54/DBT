@@ -93,6 +93,7 @@ dbt_course_pratice:    # Имя профиля (совпадает с имене
       type: postgres   # Тип базы данных: PostgreSQL
       host: localhost  # Сервер БД запущен на вашем локальном компьютере
       user: postgres   # Имя пользователя для подключения к БД
+      pass: mysecretpassword # пароль для подключения к бд
       port: 4001       # Порт, на котором слушает PostgreSQL (нестандартный, не 5432)
       dbname: dwh_flights     # Имя базы данных, к которой подключаться
       schema: intermediate    # Схема по умолчанию для создания моделей
@@ -146,3 +147,131 @@ d-----        01.09.2025     21:56                tests
 # 14. Файл "README.md" - документация к вашему проекту в формате Markdown
 -a----        01.09.2025     21:56            571 README.md
 ```
+
+5) запустим команду `dbt debug` для проверки соединения с бд:  
+```bash
+# Командная строка PowerShell показывает, что вы находитесь в папке проекта dbt_course_pratice
+PS D:\GIT\DBT\dbt_course_pratice> 
+
+# Запуск команды dbt debug для проверки конфигурации и подключения
+dbt debug
+
+# Время начала выполнения команды и версия dbt
+16:52:16  Running with dbt=1.10.10
+
+# Подтверждение версии dbt
+16:52:16  dbt version: 1.10.10
+
+# Версия Python, на которой работает dbt
+16:52:16  python version: 3.13.0
+
+# Полный путь к интерпретатору Python
+16:52:16  python path: D:\Program Files\Python\python.exe
+
+# Информация об операционной системе (Windows 11)
+16:52:16  os info: Windows-11-10.0.22631-SP0
+
+# Путь к директории, где хранятся профили dbt
+16:52:16  Using profiles dir at C:\Users\user\.dbt
+
+# Конкретный файл profiles.yml, который используется
+16:52:16  Using profiles.yml file at C:\Users\user\.dbt\profiles.yml
+
+# Файл конфигурации проекта dbt
+16:52:16  Using dbt_project.yml file at D:\GIT\DBT\dbt_course_pratice\dbt_project.yml
+
+# Тип адаптера базы данных (PostgreSQL)
+16:52:16  adapter type: postgres
+
+# Версия адаптера PostgreSQL для dbt
+16:52:16  adapter version: 1.9.0
+
+# Начало раздела проверки конфигурации
+16:52:16  Configuration:
+
+# Файл profiles.yml найден и валиден ✓
+16:52:16    profiles.yml file [OK found and valid]
+
+# Файл dbt_project.yml найден и валиден ✓
+16:52:16    dbt_project.yml file [OK found and valid]
+
+# Проверка необходимых зависимостей
+16:52:16  Required dependencies:
+
+# Git установлен и доступен ✓
+16:52:16   - git [OK found]
+
+# Пустая строка-разделитель
+16:52:16
+
+# Начало раздела информации о подключении к БД
+16:52:16  Connection:
+
+# Хост базы данных - локальный компьютер
+16:52:16    host: localhost
+
+# Порт подключения к PostgreSQL
+16:52:16    port: 4001
+
+# Имя пользователя для подключения
+16:52:16    user: postgres
+
+# Имя базы данных, к которой пытается подключиться dbt
+16:52:16    database: dwh_flights
+
+# Схема по умолчанию для создания объектов
+16:52:16    schema: intermediate
+
+# Таймаут подключения (10 секунд)
+16:52:16    connect_timeout: 10
+
+# Роль в БД (не указана)
+16:52:16    role: None
+
+# Search path (не указан)
+16:52:16    search_path: None
+
+# Настройки keepalive
+16:52:16    keepalives_idle: 0
+
+# Настройки SSL (отключены)
+16:52:16    sslmode: None
+16:52:16    sslcert: None
+16:52:16    sslkey: None
+16:52:16    sslrootcert: None
+
+# Имя приложения для идентификации в БД
+16:52:16    application_name: dbt
+
+# Количество попыток переподключения при ошибке
+16:52:16    retries: 1
+
+# Подтверждение регистрации адаптера PostgreSQL
+16:52:16  Registered adapter: postgres=1.9.0
+
+# Результат теста подключения - ОШИБКА ❌
+# (заметна задержка 11 секунд - время попытки подключения)
+16:52:27    Connection test: [ERROR]
+
+# Итог: одна проверка не пройдена
+16:52:27  1 check failed:
+
+# Общее описание ошибки - не удалось подключиться к БД
+16:52:27  dbt was unable to connect to the specified database.
+
+# Начало детального сообщения об ошибке от PostgreSQL
+The database returned the following error:
+
+# Конкретная ошибка от PostgreSQL:
+# Подключение к серверу прошло успешно, но база данных "dwh_flights" не существует
+  >Database Error
+  connection to server at "localhost" (::1), port 4001 failed: FATAL:  database "dwh_flights" does not exist
+
+# Рекомендация проверить учетные данные БД
+Check your database credentials and try again. For more information, visit:
+
+# Ссылка на документацию dbt по настройке профилей
+https://docs.getdbt.com/docs/configure-your-profile
+```  
+
+Проблема в том, что указанная база данных `dwh_flights` не существует.  
