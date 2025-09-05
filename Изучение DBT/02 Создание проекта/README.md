@@ -274,4 +274,78 @@ Check your database credentials and try again. For more information, visit:
 https://docs.getdbt.com/docs/configure-your-profile
 ```  
 
-Проблема в том, что указанная база данных `dwh_flights` не существует.  
+Проблема в том, что указанная база данных `dwh_flights` не существует. Создаем базу любым удобным способом и снова запускаем команду `dbt debug`:  
+```bash
+# Время запуска и версия dbt
+17:00:48  Running with dbt=1.10.10
+
+# Подтверждение версии dbt
+17:00:48  dbt version: 1.10.10
+
+# Версия Python
+17:00:48  python version: 3.13.0
+
+# Путь к интерпретатору Python
+17:00:48  python path: D:\Program Files\Python\python.exe
+
+# Информация об ОС (Windows 11)
+17:00:48  os info: Windows-11-10.0.22631-SP0
+
+# Директория с профилями dbt
+17:00:48  Using profiles dir at C:\Users\user\.dbt
+
+# Используемый файл профилей
+17:00:48  Using profiles.yml file at C:\Users\user\.dbt\profiles.yml
+
+# Файл конфигурации проекта
+17:00:48  Using dbt_project.yml file at D:\GIT\DBT\dbt_course_pratice\dbt_project.yml
+
+# Тип адаптера БД (PostgreSQL)
+17:00:48  adapter type: postgres
+
+# Версия адаптера PostgreSQL
+17:00:48  adapter version: 1.9.0
+
+# Раздел проверки конфигурации
+17:00:48  Configuration:
+
+# Оба конфигурационных файла найдены и валидны ✓
+17:00:48    profiles.yml file [OK found and valid]
+17:00:48    dbt_project.yml file [OK found and valid]
+
+# Проверка зависимостей
+17:00:48  Required dependencies:
+
+# Git установлен и доступен ✓
+17:00:48   - git [OK found]
+
+# Раздел информации о подключении
+17:00:48  Connection:
+
+# Параметры подключения (совпадают с вашим profiles.yml)
+17:00:48    host: localhost
+17:00:48    port: 4001
+17:00:48    user: postgres
+17:00:48    database: dwh_flights
+17:00:48    schema: intermediate
+17:00:48    connect_timeout: 10
+17:00:48    role: None
+17:00:48    search_path: None
+17:00:48    keepalives_idle: 0
+17:00:48    sslmode: None
+17:00:48    sslcert: None
+17:00:48    sslkey: None
+17:00:48    sslrootcert: None
+17:00:48    application_name: dbt
+17:00:48    retries: 1
+
+# Адаптер PostgreSQL зарегистрирован
+17:00:48  Registered adapter: postgres=1.9.0
+
+# ✅ ТЕСТ ПОДКЛЮЧЕНИЯ ПРОЙДЕН УСПЕШНО!
+# Подключение установлено за ~1 секунду
+17:00:49    Connection test: [OK connection ok]
+
+# ✅ ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ!
+17:00:49  All checks passed!
+```
