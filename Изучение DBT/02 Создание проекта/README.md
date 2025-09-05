@@ -349,3 +349,66 @@ https://docs.getdbt.com/docs/configure-your-profile
 # ✅ ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ!
 17:00:49  All checks passed!
 ```
+
+6) Сбор проекта `dbt build`. Проект падает из-за проверки на not_null в файле `models/example/my_first_dbt_model.sql`:
+```bash
+# переходим в папку проекта
+# Запуск dbt build с версией 1.10.10
+17:24:40  Running with dbt=1.10.10
+
+# Адаптер PostgreSQL зарегистрирован
+17:24:41  Registered adapter: postgres=1.9.0
+
+# Полный парсинг проекта (так как это первый запуск)
+17:24:41  Unable to do partial parsing because saved manifest not found. Starting full parse.
+
+# Найдено в проекте: 2 модели, 4 теста, 434 макроса (встроенных)
+17:24:47  Found 2 models, 4 data tests, 434 macros
+
+# Используется 4 потока (как вы настроили)
+17:24:47  Concurrency: 4 threads (target='dev')
+
+# Начало выполнения первой модели
+17:24:48  1 of 6 START sql table model intermediate.my_first_dbt_model ................... [RUN]
+
+# ✅ Модель успешно создана как таблица (SELECT 2 строки за 0.51s)
+17:24:49  1 of 6 OK created sql table model intermediate.my_first_dbt_model .............. [SELECT 2 in 0.51s]
+
+# Параллельный запуск двух тестов
+17:24:49  3 of 6 START test unique_my_first_dbt_model_id ................................. [RUN]
+17:24:49  2 of 6 START test not_null_my_first_dbt_model_id ............................... [RUN]
+
+# ❌ Тест на not_null провалился (FAIL 1 - найдена 1 нулевая запись)
+17:24:49  2 of 6 FAIL 1 not_null_my_first_dbt_model_id ................................... [FAIL 1 in 0.39s]
+
+# ✅ Тест на уникальность прошел успешно
+17:24:49  3 of 6 PASS unique_my_first_dbt_model_id ....................................... [PASS in 0.40s]
+
+# Пропуск остальных моделей и тестов (из-за ошибки в первом тесте)
+17:24:49  4 of 6 SKIP relation intermediate.my_second_dbt_model .......................... [SKIP]
+17:24:49  6 of 6 SKIP test unique_my_second_dbt_model_id ................................. [SKIP]
+17:24:49  5 of 6 SKIP test not_null_my_second_dbt_model_id ............................... [SKIP]
+
+# Итоги выполнения: 1 модель, 4 теста, 1 представление за 2.10 секунды
+17:24:49  Finished running 1 table model, 4 data tests, 1 view model in 0 hours 0 minutes and 2.10 seconds (2.10s).
+
+# Сводка результатов: 1 ошибка, 0 частичных успехов, 0 предупреждений
+17:24:49  Completed with 1 error, 0 partial successes, and 0 warnings:
+
+# Детали ошибки: тест not_null_my_first_dbt_model_id из файла schema.yml
+17:24:49  Failure in test not_null_my_first_dbt_model_id (models\example\schema.yml)
+
+# Тест нашел 1 запись с NULL значением (должен был провалиться при != 0)
+17:24:49    Got 1 result, configured to fail if != 0
+
+# Путь к скомпилированному SQL-коду теста
+17:24:49    compiled code at target\compiled\dbt_course_pratice\models\example\schema.yml\not_null_my_first_dbt_model_id.sql
+
+# Финальная статистика: 
+# PASS=2 (успешные операции) 
+# WARN=0 (предупреждения) 
+# ERROR=1 (ошибки) 
+# SKIP=3 (пропущенные операции) 
+# TOTAL=6 (всего операций)
+17:24:49  Done. PASS=2 WARN=0 ERROR=1 SKIP=3 NO-OP=0 TOTAL=6
+```
