@@ -465,6 +465,59 @@ https://docs.getdbt.com/docs/configure-your-profile
 # TOTAL=4 (всего операций)
 17:30:47  Done. PASS=4 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=4
 ```
+Удалим проверку из файла и запустим снова и команда завершается без ошибок:  
+```bash
+# Запуск dbt build с версией 1.10.10
+17:30:45  Running with dbt=1.10.10
+
+# Адаптер PostgreSQL зарегистрирован
+17:30:45  Registered adapter: postgres=1.9.0
+
+# Найдено в проекте: 2 модели, 2 теста, 434 макроса (встроенных)
+# ⚠️ Обратите внимание: теперь только 2 теста вместо 4 (видимо, вы удалили тесты на not_null)
+17:30:45  Found 2 models, 2 data tests, 434 macros
+
+# Используется 4 потока (как вы настроили)
+17:30:45  Concurrency: 4 threads (target='dev')
+
+# Начало выполнения первой модели (таблица)
+17:30:46  1 of 4 START sql table model intermediate.my_first_dbt_model ................... [RUN]
+
+# ✅ Модель успешно создана как таблица (SELECT 2 строки за 0.25s)
+17:30:46  1 of 4 OK created sql table model intermediate.my_first_dbt_model .............. [SELECT 2 in 0.25s]
+
+# Запуск теста на уникальность для первой модели
+17:30:46  2 of 4 START test unique_my_first_dbt_model_id ................................. [RUN]
+
+# ✅ Тест на уникальность прошел успешно
+17:30:46  2 of 4 PASS unique_my_first_dbt_model_id ....................................... [PASS in 0.17s]
+
+# Начало выполнения второй модели (представление)
+17:30:46  3 of 4 START sql view model intermediate.my_second_dbt_model ................... [RUN]
+
+# ✅ Вторая модель успешно создана как представление (CREATE VIEW за 0.17s)
+17:30:47  3 of 4 OK created sql view model intermediate.my_second_dbt_model .............. [CREATE VIEW in 0.17s]
+
+# Запуск теста на уникальность для второй модели
+17:30:47  4 of 4 START test unique_my_second_dbt_model_id ................................ [RUN]
+
+# ✅ Тест на уникальность для второй модели прошел успешно
+17:30:47  4 of 4 PASS unique_my_second_dbt_model_id ...................................... [PASS in 0.14s]
+
+# Итоги выполнения: 1 таблица, 2 теста, 1 представление за 1.35 секунды
+17:30:47  Finished running 1 table model, 2 data tests, 1 view model in 0 hours 0 minutes and 1.35 seconds (1.35s).
+
+# ✅ ВСЕ ОПЕРАЦИИ ВЫПОЛНЕНЫ УСПЕШНО!
+17:30:47  Completed successfully
+
+# Финальная статистика: 
+# PASS=4 (все 4 операции успешны) 
+# WARN=0 (предупреждений нет)
+# ERROR=0 (ошибок нет)
+# SKIP=0 (ничего не пропущено)
+# TOTAL=4 (всего операций)
+17:30:47  Done. PASS=4 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=4
+```
 Удалим папку example тк она нам в будущем не понадобится. При выполнении команды `dbt_build` получим инфомрацию о том, что собирать нечего, ни одной модели нет:  
 ```bash
 # Запуск dbt build с версией 1.10.10
