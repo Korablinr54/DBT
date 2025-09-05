@@ -465,3 +465,24 @@ https://docs.getdbt.com/docs/configure-your-profile
 # TOTAL=4 (всего операций)
 17:30:47  Done. PASS=4 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=4
 ```
+Удалим папку example тк она нам в будущем не понадобится. При выполнении команды `dbt_build` получим инфомрацию о том, что собирать нечего, ни одной модели нет:  
+```bash
+# Запуск dbt build с версией 1.10.10
+17:35:14  Running with dbt=1.10.10
+
+# Адаптер PostgreSQL зарегистрирован
+17:35:14  Registered adapter: postgres=1.9.0
+
+# ⚠️ Предупреждение: в dbt_project.yml есть неиспользуемые конфигурационные пути
+# Указанный путь models.dbt_course_pratice.example не применяется ни к каким ресурсам
+17:35:14  [WARNING]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.dbt_course_pratice.example
+
+# Найдено только макросы (434 встроенных макроса dbt)
+17:35:14  Found 434 macros
+
+# ✅ НИЧЕГО ДЕЛАТЬ НЕ НУЖНО - все модели уже актуальны!
+17:35:14  Nothing to do. Try checking your model configs and model specification args
+```  
+
