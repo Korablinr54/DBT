@@ -33,7 +33,7 @@ please consult the dbt documentation here:
 # 6. Приветственное сообщение от сообщества dbt с ссылками на каналы поддержки
 One more thing:
 
-Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+Need help? Dont hesitate to reach out to us via GitHub issues or on Slack:
 
   https://community.getdbt.com/
 
@@ -47,7 +47,7 @@ Which database would you like to use?
 [1] postgres
 
 # 9. Ссылка на документацию по другим доступным адаптерам (поддерживаемым БД)
-(Don't see the one you want? https://docs.getdbt.com/docs/available-adapters)
+(Dont see the one you want? https://docs.getdbt.com/docs/available-adapters)
 
 # 10. Приглашение ввести номер выбранной БД (вы ввели 1 для postgres)
 Enter a number: 1
@@ -76,8 +76,26 @@ threads (1 or more) [1]: 4
 # 18. Подтверждение, что профиль с именем 'dbt_course_pratice' был записан в файл profiles.yml в вашей домашней директории.
 #     Файл был создан на основе шаблона и предоставленных вами значений.
 #     Команда также предлагает выполнить 'dbt debug' для проверки подключения к БД.
-16:18:11  Profile dbt_course_pratice written to C:\Users\user\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+16:18:11  Profile dbt_course_pratice written to C:\Users\user\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug\' to validate the connection.
 
 # 19. Возврат в командную строку PowerShell, указывающий, что процесс завершен.
 PS D:\GIT\DBT>
+```
+
+3) Проваерим, что все указали верно:  
+```bash
+# открываем для чтения профиль profiles.yml в вашей домашней директории.  
+D:\GIT\DBT> cat ~/.dbt/profiles.yml  
+
+dbt_course_pratice:    # Имя профиля (совпадает с именем проекта)
+  outputs:
+    dev:               # Цель (target) подключения с именем "dev" (разработка)
+      type: postgres   # Тип базы данных: PostgreSQL
+      host: localhost  # Сервер БД запущен на вашем локальном компьютере
+      user: postgres   # Имя пользователя для подключения к БД
+      port: 4001       # Порт, на котором слушает PostgreSQL (нестандартный, не 5432)
+      dbname: dwh_flights     # Имя базы данных, к которой подключаться
+      schema: intermediate    # Схема по умолчанию для создания моделей
+      threads: 4              # Количество одновременных подключений к БД
+  target: dev          # Какая цель подключения используется по умолчанию
 ```
