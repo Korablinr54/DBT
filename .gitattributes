@@ -1,7 +1,14 @@
-# Принудительно указываем языки
+# Определяем SQL файлы как SQL
 *.sql linguist-language=SQL
-
-# Если хотите преобладание SQL над другими языками
 *.sql linguist-detectable=true
-*.py linguist-detectable=false
-*.js linguist-detectable=false
+
+# Для PL/SQL (если есть специфичные файлы)
+*.pks linguist-language=PLSQL
+*.pkb linguist-language=PLSQL
+*.pls linguist-language=PLSQL
+
+# Исключаем документацию из статистики
+*.md linguist-documentation
+*.yml linguist-documentation
+*.yaml linguist-documentation
+README linguist-documentation
