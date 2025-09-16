@@ -1,0 +1,7 @@
+# Принудительно указываем языки
+*.sql linguist-language=SQL
+
+# Если хотите преобладание SQL над другими языками
+*.sql linguist-detectable=true
+*.py linguist-detectable=false
+*.js linguist-detectable=false
