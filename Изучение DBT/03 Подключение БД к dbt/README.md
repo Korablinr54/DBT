@@ -11,7 +11,7 @@ CREATE SERVER demo_pg foreign data wrapper postgres_fdw options (
 	   port '5432'
 );
 
-CREATE USER mapping FRO postgres server demo_pg options (
+CREATE USER mapping FROM postgres server demo_pg options (
 	   user 'postgres',
 	   password 'mysecretpassword'
 );
@@ -49,6 +49,17 @@ CREATE SERVER demo_pg foreign data wrapper postgres_fdw options (
 );
 ```  
 Имя сервера (`demo_pg`), используемый враппер (`postgres_fdw`) и параметры подключения: хост, имя базы данных-источника (`demo`) и порт. Это просто "запись о том, как подключиться к другому серверу", без данных для аутентификации.  
+
+<br>
+  
+## 4) Связать созданный внешний сервер с конкретными учетными данными
+```sql
+CREATE USER mapping FROM postgres server demo_pg options (
+	   user 'postgres',
+	   password 'mysecretpassword'
+);
+```  
+Сервер (`demo_pg`) знает, куда подключаться, а сопоставление пользователей говорит ему, под каким логином и паролем это делать. Здесь указываются реальные учетные данные для подключения к исходной БД demo.
 
 <br>
   
