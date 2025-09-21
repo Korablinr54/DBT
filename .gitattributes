@@ -8,7 +8,8 @@
 *.pls linguist-language=PLSQL
 
 # Исключаем документацию из статистики
-*.md linguist-documentation
+*.md linguist-documentation=SQL
 *.yml linguist-documentation
 *.yaml linguist-documentation
+
 README linguist-documentation
