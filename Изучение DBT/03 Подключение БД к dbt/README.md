@@ -1,5 +1,7 @@
 # Настройка подключения 
 ```sql
+SELECT * FROM pg_catalog.pg_available_extensions;
+
 CREATE extension postgres_fdw;
 
   DROP SERVER IF EXISTS demo_pg cascade;
@@ -26,6 +28,14 @@ import foreign SCHEMA bookings FROM server demo_pg INTO demo_src;
 SELECT * FROM pg_catalog.pg_available_extensions;
 ```  
 Чтобы убедиться, что необходимое расширение postgres_fdw присутствует в системе. Это предварительный шаг перед его установкой.
+
+<br>
+  
+## 2) Активировать расширение postgres_fdw в текущей базе данных (dwh_flight)  
+```sql
+CREATE EXTENSION postgres_fdw;
+```  
+Это расширение позволяет PostgreSQL работать как клиент другого сервера PostgreSQL. Вы можете создавать "внешние таблицы" в своей БД, которые на самом деле являются ссылками на таблицы в другой, удаленной БД. Операции SELECT над этими внешними таблицами прозрачно выполняются на удаленном сервере.  
 
 <br>
   
