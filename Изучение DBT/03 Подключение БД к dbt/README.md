@@ -72,3 +72,11 @@ CREATE SCHEMA demo_src authorization postgres;
 
 <br>
   
+## 6) Cоздать внешние таблицы в схеме `demo_src`
+```sql
+import foreign SCHEMA bookings FROM server demo_pg INTO demo_src;
+```
+PostgreSQL подключается к серверу `demo_pg`, читает метаинформацию (список таблиц, их столбцы, типы данных) из схемы `bookings` исходной базы `demo` и создает в вашей схеме `demo_src` одноименные внешние таблицы. Эти таблицы не содержат своих данных — они являются "окнами" в таблицы исходной БД.  
+
+<br>
+  
