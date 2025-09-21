@@ -39,3 +39,16 @@ CREATE EXTENSION postgres_fdw;
 
 <br>
   
+## 3) Создать новое определение внешнего сервера
+```sql
+  DROP SERVER IF EXISTS demo_pg cascade;
+CREATE SERVER demo_pg foreign data wrapper postgres_fdw options (
+	   host 'localhost',
+	   dbname 'demo',
+	   port '5432'
+);
+```  
+Имя сервера (`demo_pg`), используемый враппер (`postgres_fdw`) и параметры подключения: хост, имя базы данных-источника (`demo`) и порт. Это просто "запись о том, как подключиться к другому серверу", без данных для аутентификации.  
+
+<br>
+  
