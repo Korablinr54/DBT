@@ -63,3 +63,12 @@ CREATE USER mapping FROM postgres server demo_pg options (
 
 <br>
   
+## 5) Создать отдельную схему в DWH (dwh_flight) для хранения всех внешних таблиц
+```sql
+  DROP SCHEMA IF EXISTS demo_src;
+CREATE SCHEMA demo_src authorization postgres;
+```
+Позволяет изолировать внешние объекты от внутренних таблиц хранилища и делает структуру базы данных чище и понятнее.
+
+<br>
+  
